@@ -1,0 +1,30 @@
+{
+  "rules": [
+    {
+      "host": "ubt.whalespace.io",
+      "mode": "paused",
+      "source": "https://ubt.whalespace.io",
+      "verification": "evaluation paths pending; conservatively pause whole host"
+    },
+    {
+      "host": "class.whalespace.io",
+      "mode": "class",
+      "source": "https://help.whale.naver.com/ko/whaleclass/"
+    },
+    {
+      "host": "teamboard.whalespace.io",
+      "mode": "teamboard",
+      "source": "https://help.whale.naver.com/ko/whalespace/teamboard/gettingstarted/login/"
+    },
+    {
+      "host": "teamboard.whale.naver.com",
+      "mode": "teamboard",
+      "source": "https://help.whale.naver.com/ko/whalespace/teamboard/gettingstarted/login/"
+    },
+    {
+      "host": "study.whaleon.naver.com",
+      "mode": "remote",
+      "source": "https://help.whale.naver.com/ko/whaleclass/"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+import {useEffect,useState} from 'react';
+import {WebHome} from './WebHome';
+import {PersonalLearning} from './PersonalLearning';
+import {TeacherDashboard,StudentSession,Board,Booth} from './Classroom';
+import {ClassTools} from './ClassTools';
+import {SharedSet} from './SharedSet';
+import {Brand} from './Brand';
+import {modeNames,type SidebarMode} from '../context/modes';
+import './application.css';
+function useRoute(){const [route,setRoute]=useState(()=>location.hash.slice(1)||'home');useEffect(()=>{const fn=()=>setRoute(location.hash.slice(1)||'home');window.addEventListener('hashchange',fn);return()=>window.removeEventListener('hashchange',fn);},[]);return route;}
+export function App(){const route=useRoute();const [mode,setMode]=useState<SidebarMode>('lesson');useEffect(()=>{const receive=(event:MessageEvent)=>{if(event.source!==window.parent||window.parent===window)return;if(event.origin!==location.origin&&!/^(chrome|whale)-extension:\/\/[a-p]{32}$/.test(event.origin))return;if(event.data?.type==='WQ_MODE'&&['class','teamboard','remote','lesson','paused'].includes(event.data.mode))setMode(event.data.mode);};window.addEventListener('message',receive);return()=>window.removeEventListener('message',receive);},[]);
+if(mode==='paused'&&window.parent!==window)return <div className="app-shell"><p role="alert" className="pause-banner">UBT 평가 중 · 모든 학생 대상 기능이 일시 정지되었습니다.</p></div>;
+if(['home','start','experience','progress'].includes(route))return <WebHome/>;const [page,code]=route.split('/');const student=page==='learn'||page==='join'||page==='shared';const embedded=page==='context';return <div className={embedded?'app-shell embedded':'app-shell'}><a className="skip-link" href="#app-main">본문으로 건너뛰기</a>{!embedded&&<header className="app-header"><a href="#home"><Brand/></a><nav aria-label="앱 메뉴"><a href="#join">수업 참여</a><a href="#learn">혼자 학습하기</a>{!student&&<><a href="#teacher">교사 수업</a><a href="#tools">수업 도구</a></>}</nav></header>}<main id="app-main">{(page==='teacher'||embedded)&&<>{!embedded&&<div className="mode-tabs" role="group" aria-label="웹 시연 모드">{(['class','teamboard','remote','lesson','paused'] as SidebarMode[]).map(m=><button aria-pressed={mode===m} key={m} onClick={()=>setMode(m)}>{modeNames[m]}</button>)}</div>}<TeacherDashboard mode={mode}/></>}{page==='learn'&&<PersonalLearning/>}{page==='shared'&&<SharedSet key={code||''} token={code||''}/>}{page==='join'&&<StudentSession key={code||'join'} code={code||''}/>} {page==='tools'&&<ClassTools/>}{page==='board'&&<Board code={code||''}/>} {page==='booth'&&<Booth/>}{!['teacher','context','learn','shared','join','tools','board','booth'].includes(page)&&<p>화면을 찾을 수 없습니다. <a href="#home">홈으로</a></p>}</main></div>;}

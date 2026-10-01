@@ -1,8 +1,12 @@
-import {copyFile,mkdir,writeFile} from 'node:fs/promises';
+import {copyFile,mkdir,writeFile,readFile} from 'node:fs/promises';
+import {loadEnv} from 'vite';
 import {deflateSync} from 'node:zlib';
 const out=new URL('../dist/extension/',import.meta.url);
 await mkdir(new URL('icons/',out),{recursive:true});
 for(const file of ['manifest.json','background.js'])await copyFile(new URL('../apps/extension/'+file,import.meta.url),new URL(file,out));
+await copyFile(new URL('../packages/context/service-domains.json',import.meta.url),new URL('service-domains.json',out));
+const configured=process.env.VITE_PUBLIC_APP_URL||loadEnv('production',process.cwd(),'VITE_PUBLIC_').VITE_PUBLIC_APP_URL;
+if(configured){const url=new URL(configured);const local=['localhost','127.0.0.1','[::1]'].includes(url.hostname);if(url.protocol!=='https:'&&!(url.protocol==='http:'&&local)||url.username||url.password||url.search||url.hash||url.pathname!=='/')throw Error('VITE_PUBLIC_APP_URL must be a safe app root');const manifestPath=new URL('manifest.json',out);const manifest=JSON.parse(await readFile(manifestPath,'utf8'));manifest.host_permissions=[...manifest.host_permissions,url.protocol+'//'+url.hostname+'/*'];await writeFile(manifestPath,JSON.stringify(manifest,null,2));}
 function crc32(data){let c=0xffffffff;for(const b of data){c^=b;for(let i=0;i<8;i++)c=(c>>>1)^((c&1)?0xedb88320:0);}return(c^0xffffffff)>>>0;}
 function chunk(name,data){const type=Buffer.from(name);const result=Buffer.alloc(data.length+12);result.writeUInt32BE(data.length);type.copy(result,4);data.copy(result,8);result.writeUInt32BE(crc32(Buffer.concat([type,data])),data.length+8);return result;}
 function icon(size){

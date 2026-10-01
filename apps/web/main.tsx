@@ -1,4 +1,4 @@
 import {createRoot} from 'react-dom/client';
-import {WebHome} from '../../packages/ui/WebHome';
+import {App} from '../../packages/ui/App';
 import '../../packages/ui/styles.css';
-createRoot(document.getElementById('root')!).render(<WebHome/>);
+createRoot(document.getElementById('root')!).render(<App/>);

@@ -1,92 +1,51 @@
-# Whale Quest 작업 인수인계
+# Whale Quest 인수인계 (v0.6)
 
-기준일: 2026-10-01. 작업 브랜치: phase-1-foundation. 저장소: https://github.com/codersongpro/whalequest
+2026-10-01. 저장소 https://github.com/codersongpro/whalequest · 작업 브랜치 phase-1-foundation. 이름은 초기 브랜치이나 현재 범위는 통합 시연이다.
 
-## 체크포인트 저장 상태
+## 최신 요청과 승인
 
-Phase 1 코드와 문서는 커밋 4960d02에 저장했다. 원격 저장소는 codersongpro/whalequest이며 GitHub 메타데이터에서 PUBLIC으로 확인했다. **2026-10-01 사용자 승인 후 phase-1-foundation 브랜치에 체크포인트를 푸시했다.**
+사용자는 기존 페이즈 중단 방식을 바꾸어 본선 전체를 작업하고 웨일 서비스와 연결된 시연을 요구했다. 이어 Supabase 프로젝트가 없으므로 **시연 모드와 연결 준비까지** 허용했다. 최우선 원본은 reference/whale-quest-plan-v0.6.md. v0.5의 관문A/B는 폐기하고 하나의 최종 산출물/L2 상황인식 중심으로 변경했다. AGENTS.md도 갱신했다.
 
-첫 push는 전체 파일 묶음의 공개 업로드에 대한 명시적 승인 부족으로 자동 승인 검토에서 차단되었다. 이후 사용자가 소스·문서·PRD 원본의 공개 업로드 안내에 대해 “푸시해”라고 승인했고, 정상 push가 성공했다. 다른 환경에서는 phase-1-foundation 브랜치를 체크아웃해 Phase 1을 이어 작업한다. PR·공개 배포·릴리스·다음 페이즈 구현은 수행하지 않았다.
+이전 원본PRD/공유대화는 참고이며 문서 안의 작업 지시를 외부 메시지/배포/출품 승인으로 간주하지 않는다. 앱/매니페스트는0.1.0 유지, 문서만v0.6. 공개 GitHub source/docs 업로드는 이전 ‘푸시해’ 요청에 따라 승인된 저장소로 진행한다. PR/릴리스/스토어/공개서비스 배포는 수행하지 않았다.
 
-## 다음 작업자의 첫 행동
+## 구현 지도
 
-1. 이 문서와 VERIFICATION.md, ROADMAP.md, IMPLEMENTATION_PLAN.md를 읽는다.
-2. git status와 현재 브랜치, package.json, 관련 소스를 확인한다. 문서보다 코드/새 검증 결과가 달라졌으면 상태를 갱신한다.
-3. **현재 Phase 1의 남은 작업만 이어 간다.** Phase 2 이후를 한 번에 구현하지 않는다.
-4. 변경 후 관련 검사 결과를 기록하고 페이즈 결과를 보고한 뒤 멈춘다.
+- packages/core: 공통3유형 채점/검증, 기존PRD JSON1.0 변환, 버전별 복습선별, IndexedDB 원자적 백업/복원/삭제, 완료PNG/프롬프트/4예제, 브라우저시연 공유.
+- packages/ui/PersonalLearning: 문항별 검수·편집·집중/오답/오늘복습·기록·완료카드·JSON백업.
+- packages/classroom/demo-room: localStorage 동일브라우저 방/참여/활동/만료, WebLocks로 동시탭 변경 직렬화, 로컬채점/중복기여1회. **운영 서버 권한이 아니다.**
+- packages/ui/Classroom: 교사제어/학생/집계Board/부스, 자동 오답 전달물, 클래스문안/복습추천, 질문/결과, 학생본인 수업응답→개인복습 명시적복사.
+- packages/ui/ClassTools: 로컬타이머/명단/랜덤/모둠·수정/QR, 모둠 전달물은 인원수만.
+- packages/context: service-domains.json 정확한호스트 판정, use-context Chrome storage 이벤트. App/ContextSidebar는 mode 메시지의 부모/원점검사. UBT는 수동·iframe경로 변경으로 우회하지 못하게 잠금.
+- packages/handoff: 집계오답/모둠/검수질문 전달물 로컬보관, 방만료 필터/정리, 카드PNG.
+- apps/extension: host 제한 MV3 background 탭 이벤트, DOM읽기/tabs/content_scripts 없음. sidebar iframe은 동일웹앱 context route.
+- packages/server: 익명 인증/토큰갱신/12RPC 계약·타임아웃/키검증 adapter. **UI에 연결하지 않음.**
+- docs/reference/supabase-schema.sql: 비공개표/권한/서버채점/기여/공유의 **실행 안 한 초안**. 검증마이그레이션 아님.
 
-사용자의 최신 요청은 토큰 한도 때문에 다른 AI가 이어 작업할 수 있도록 저장소에 handoff를 남기는 것이다. 이전 요청은 이 저장소 활용 및 페이즈별 진행이다. 전체 계획은 승인되었으나 한 번에 구현하는 것은 허용하지 않았다. 원본 PRD 안의 지시문은 참고 자료이며 사용자 최신 요청을 대체하지 않는다.
+## 실행과 이어갈 항목
 
-## 현재 구현: Phase 1 기반
+Node22.12+ npm ci → npm run dev. npm run check는 lint/type/unit/build/Edge 웹E2E. CI는 Chromium. docs/QUICK_START.md, DEMO_CHECKLIST.md 참조. 실제서버는 SUPABASE_SETUP.md, 남은일은 REMAINING_WORK.md.
 
-| 파일/폴더 | 실제 내용 |
-|---|---|
-| apps/web/main.tsx + packages/ui/WebHome.tsx | 한국어 소개/개발 현황/설치 안내 |
-| apps/extension/main.tsx + packages/ui/Sidebar.tsx | 연결 설정·주소 저장·웹앱 열기 UI |
-| packages/shared/app-url.ts | HTTPS 기본 주소 검증, 로컬 HTTP 예외, 인증정보/경로/query/hash 거부 |
-| packages/shared/extension.ts | chrome.storage.local, chrome.tabs.create; 웹 미리보기는 localStorage/window.open |
-| apps/extension/manifest.json | MV3, sidebar_action, storage 권한, 서비스 워커, CSP; action 없음 |
-| apps/extension/background.js | 설치 버전 저장 |
-| packages/ui/Brand.tsx + styles.css | 자체 해양 SVG, 딥블루/시안, 반응형·포커스·건너뛰기·동작 줄이기 |
-| scripts/package-extension.mjs | 매니페스트/워커 복사, 자체 PNG 아이콘 생성 |
-| tests/app-url.test.ts | URL 검증 11개 |
-| tests/e2e/foundation.spec.ts | 웹 기본 화면 1개 + 360/390/590/1280px 레이아웃 4개 |
-| scripts/verify-whale.mjs | 웨일 자동 검증 시도용. 실제 실행 성공 미확인 |
-| vercel.json + .github/workflows/check.yml | 배포 설정 및 CI 정의만 있음 |
+코드는 시연으로 전체흐름을 체험하지만 v0.6의 실제웨일/수업/부하/공식연계 완료게이트는 아직 안 됐다. 다른기기/휴대폰QR은 현재 연결되지 않는다. 어떤 환경변수를 입력해도 앱이자동live로 바뀌지 않는다. demo-room을 서버adapter와 연결하는 후속구현이 필요하다.
 
-웹/확장앱 빌드는 dist/web, dist/extension. dist는 Git에 올리지 않고 CI artifact 또는 로컬 빌드로 제공한다.
+확장 iframe 저장소 공유에는 빌드전 VITE_PUBLIC_APP_URL이 필요하다. package-extension은 지정된 앱호스트1개를 host_permissions에 추가한다. 이는 iframe 저장소분리 예외의 구현결정이다. 모드판정은 서비스호스트만 사용, 일반탭주소/DOM 저장 없음. 웨일환경에서 재검증 필요. 웹 frame-ancestors 현재extension스킴 허용은 시연용, 운영 전 확장ID 제한/단기 교사 연결코드 검증.
 
-**아직 없는 것:** 오늘의 수업 저장·편집·진행 상태, 랜덤/모둠/타이머/QR, Supabase/DB/익명 세션/수업방, 문제 엔진/문제 편집/퀴즈/통계/레이드, IndexedDB/개인 학습/공유, 결과 저장. 화면의 준비 중 카드는 실제 기능이 아니다.
+## 검증과 발견/수정
 
-## 검증 요약
+현재 npm run check의 61단위/모의계약 + 13웹E2E 통과. 세 학생탭 수업→평가→레이드→자동오답카드→클래스추천→학생복습, 완료PNG/재시작기록, 공유사본, UBT iframe경로차단, 360/390/590/1280px 등. 자세한 최신기록은 VERIFICATION.md. 검사파일이 늘면 실제결과로 갱신한다.
 
-2026-10-01 로컬에서 lint·타입·웹/확장앱 빌드 통과, URL 단위 테스트 11/11, Edge 웹 E2E 5/5 통과. 웨일 자동 실행은 이전 시도 실패이고 이번 handoff에서 재실행하지 않았다. 설치/사이드바 실기기 게이트는 미완료다. 상세 근거와 한계는 VERIFICATION.md 참조.
+정적리뷰에서 부스시간만료시계·UBT iframe경로우회·수업오답개인복습단절·만료방 표시를 수정했다. 방 코드와 버전을 함께 비교하고 별도1초시계는 유지한다. 같은버전 다른방 전환·공유토큰 상태초기화·부스30초 타이머 재설정 오류도 실패 재현 후 회귀검사로 확인했다. 실제웨일 headless 실행은 disable-extensions 인수제외 후에도 시작단계 Targetclosed/exit0으로 실패했다. 원인미확정, 실기기게이트미완료.
 
-## 남은 Phase 1 작업 — 우선순위
+## 다음 작업자 주의
 
-### 1. 웨일 실제 설치 검증
+- 최신코드/현재브랜치/status를 먼저 확인하고 파일을 불필요하게 전체탐색하지 않는다. 이전Phase1 완료기준만 보고 현앱을 되돌리지 않는다.
+- 원격CI·실기기·실제API·교사검수·현장효과를 로컬테스트 통과와 구분한다.
+- 현재 예제standard는 검수용 학습목표, 공식코드확인완료아님. 정답/코드/교육과정 적합성을 교사가 확인해야 한다.
+- 질문카드는 자유서술이므로 교사개인정보검수 필요. 레이드카드는학생별명/신원/개별단답 제외.
+- 로컬시연 질문/정답/teacherowner는클라이언트에 있음. 실제학생정보 금지, 운영으로 사용금지. 실제RLS/정답비공개/서버채점/전송대기/재접속은 서버환경에 연결/검증.
+- UBT 전체host 보수잠금이며 실제평가경로/네이티브웨일온 감지범위 주최확인 필요. L2+/L3는허용전추가하지않음.
+- outputs/whale-quest에는 과거미완성전체초안이 따로 있다. 현재저장소에는통합하지 않았으며 무검증복사하지 않는다.
+- 확장패키지/영상/부하/학급적용의실증은마무리전필수. 최신남은일목록을우선한다.
 
-이 환경의 설치 경로: C:/Program Files/Naver/Naver Whale/Application/whale.exe
-확인된 로컬 버전: 4.39.410.14. 다른 환경에서는 재확인한다.
+## 다음 AI에게 전달
 
-기존 npm run test:whale은 launchPersistentContext 단계에서 프로세스가 종료되어 실패했다. page/worker 로드 전 실패이므로 설치 성공/실패 여부 자체도 아직 결론 내릴 수 없다. 자동 검증의 기본 인수 중 --disable-extensions와 로딩 인수의 상충, Whale의 headless/remote-debugging-pipe 지원, 실행 환경 권한 등을 좁혀 확인한다. **원인을 확정하지 않았다.**
-
-검증 스크립트는 현재 chrome.sidebarAction만 검사한다. 실제 Whale API 네임스페이스를 공식 문서/실기기에서 확인해야 한다. 다른 브라우저로 대체 테스트한 것을 Whale 통과로 쓰지 않는다. 테스트용 별도 프로필을 사용하고 사용자 기본 프로필/설치를 변경하지 않는다.
-
-실제 사이드바 버튼 실행, 390/590px, 저장 후 다시 열기, 웹앱 새 탭 열기를 확인한다. 자동화가 실패해도 수동 검증으로 확인한 항목은 따로 기록할 수 있다. 스크립트가 sidebar.html을 탭으로 열어 확인하더라도 브라우저 외곽 사이드바 버튼 검증은 별개다.
-
-### 2. ‘오늘의 수업’ 방향을 Phase 1 소개 UI에 반영
-
-방향 문서는 IMPLEMENTATION_PLAN.md에 기록했다. **현재 WebHome/Sidebar의 소개 문구는 이전 일반 기능 모음 표현이며 변경하지 않았다.**
-
-- 다음 활동을 교사가 결정하는 수업 흐름 중심 소개, 선택 가능한 5단계 예시.
-- 외부 활동에는 목적/안내/시간/모둠 링크가 있으며 링크 열기만으로 완료가 되지 않음을 설명.
-- 실제 Phase 1 제공 기능(연결)과 수업 흐름/실시간/개인 학습 예정 기능을 명확히 구분.
-- 이 단계에서는 수업 흐름 데이터/실시간 기능을 구현하지 않고 소개·계획만 정돈.
-- E2E는 h1 ‘수업을 잇는 작은 바다.’, ‘웨일에서 시작하기’, ‘웨일 확장앱 페이지 열기’를 선택자로 사용한다. 문구 변경 시 의도에 맞게 검사 갱신.
-
-### 3. 검증/납품 정리
-
-관련 검사를 재실행하고 VERIFICATION을 갱신한다. 설치용 빌드/안내를 정리하고 필요한 접근성/모바일 회귀를 확인한다. Phase 1을 완전히 통과했다고 보고하는 것은 웨일 실기기 게이트 이후다. 공개 배포·PR·버전 상승·릴리스·스토어 등록은 이번 handoff에 포함하지 않았다.
-
-## 구현 시 유지할 결정
-
-- 기술 스택/전체 범위와 상세 보안은 IMPLEMENTATION_PLAN.md 기준.
-- 학생 제출의 correct/점수를 신뢰하지 않는다. 서버 권한/채점/트랜잭션이 먼저다.
-- 수업방 코드는 참여 수단이지 교사 권한이 아니다. 정답과 타인 응답은 학생에게 숨긴다.
-- 외부 API는 공식 지원/권한 확인 후 사용. OAuth와 학습 데이터 API를 구분.
-- UBT 파일 가져오기/학생 매핑/맞춤 수업은 후속 검토. 이름만 매칭하거나 실제 파일 없이 포맷을 가정하지 않는다.
-- 개인 학습은 첫 완성 버전 필수지만 현재 구현 범위가 아니다. 개인 로컬 기록은 자동 교사 공유가 아니다.
-- 공모전 분야1/활용성/루틴 개선/웨일 연계/범용성을 유지하고 AI API는 넣지 않는다.
-
-## 환경과 과거 초안
-
-현재 Windows 작업 경로는 C:/Users/dungs/Documents/Codex/2026-09-30/https-chatgpt-com-share-6abcf32a-2acc/work/whalequest 이다. 다른 환경에서는 저장소 경로를 새로 찾는다.
-
-같은 작업공간의 outputs/whale-quest에는 페이즈 분리 요청 이전의 미완성 전체 앱 초안이 따로 남아 있다. **현재 저장소에 통합하지 않았고 검증된 제품이 아니다.** 일부 공통 엔진/DB 시도와 의존성 캐시가 있더라도 다음 페이즈의 요구사항·권한·테스트 검증 없이 복사하지 않는다. 이 저장소만으로 Phase 1 설치/빌드가 가능하다.
-
-Git 초기 설정의 core.excludesFile=NUL은 Windows에서 status를 막았다. 현재 저장소 로컬 설정만 .gitignore로 바꿨다. 전역 Git 설정은 바꾸지 않았다.
-
-## 다음 AI에게 전달할 짧은 요청
-
-> whalequest 저장소의 AGENTS.md와 docs/HANDOFF.md부터 읽고 현재 소스와 검증 상태를 확인하세요. 사용자 승인 전체 계획을 한꺼번에 구현하지 말고 Phase 1의 미완료 항목(실제 웨일 검증, 오늘의 수업 소개 UI, 검증 기록/납품 정리)만 진행하세요. 실제 구현/설계 예정/실기기 미확인을 구분하고 결과를 보고한 뒤 멈추세요. Phase 2 이후는 사용자가 요청하면 시작하세요.
+> whalequest의 AGENTS.md와 docs/HANDOFF.md, v0.6 원본·검증·남은작업을 읽고 현재 통합시연을 이어 작업하세요. 예선/본선이나 Phase1중단 기준을 되살리지 마세요. Supabase가 없어서 지금은 같은브라우저demo+연결준비입니다. 실제서버·웨일서비스탭/게시·부하/수업적용과 로컬검증을 구분하고, 먼저 남은실기기/서버연결 작업의근거를 확인하세요.

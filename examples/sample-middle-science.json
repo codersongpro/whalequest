@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "1.0",
+  "id": "sample-middle-science",
+  "version": 1,
+  "title": "중학교 과학 · 상태 변화 (교사 검수용)",
+  "questions": [
+    {
+      "id": "s1",
+      "type": "multiple-choice",
+      "prompt": "얼음이 물로 변하는 상태 변화의 이름은 무엇인가요?",
+      "options": [
+        "응고",
+        "융해",
+        "액화"
+      ],
+      "answer": 1,
+      "tags": [
+        "중학교",
+        "과학",
+        "교사 검수 필요"
+      ],
+      "standard": "검수용 학습 목표: 물질의 상태 변화 설명하기",
+      "explanation": "고체가 액체로 변하는 현상을 융해라고 합니다."
+    },
+    {
+      "id": "s2",
+      "type": "true-false",
+      "prompt": "액체인 물이 수증기로 변하면 물 입자가 사라집니다.",
+      "answer": false,
+      "tags": [
+        "중학교",
+        "과학",
+        "교사 검수 필요"
+      ],
+      "standard": "검수용 학습 목표: 상태 변화를 입자 모형으로 설명하기",
+      "explanation": "상태가 변해도 물질을 이루는 입자는 사라지지 않습니다."
+    },
+    {
+      "id": "s3",
+      "type": "short-answer",
+      "prompt": "액체가 고체로 변하는 현상을 무엇이라고 하나요?",
+      "answer": [
+        "응고"
+      ],
+      "tags": [
+        "중학교",
+        "과학",
+        "교사 검수 필요"
+      ],
+      "standard": "검수용 학습 목표: 물질의 상태 변화 설명하기",
+      "explanation": "물이 얼음으로 변하는 것이 응고의 예입니다."
+    }
+  ]
+}

@@ -9,13 +9,13 @@ await mkdir(path.join(root,'.work'),{recursive:true});
 const profile=await mkdtemp(path.join(root,'.work','whale-profile-'));
 const manifest=JSON.parse(await readFile(path.join(extensionPath,'manifest.json'),'utf8'));
 assert.equal(manifest.manifest_version,3);assert.equal(manifest.sidebar_action.default_page,'sidebar.html');assert.equal(manifest.action,undefined);
-const browser=await chromium.launchPersistentContext(profile,{executablePath,headless:true,args:[`--disable-extensions-except=${extensionPath}`,`--load-extension=${extensionPath}`,'--no-first-run','--no-default-browser-check'],viewport:{width:390,height:960}});
+const browser=await chromium.launchPersistentContext(profile,{executablePath,headless:true,ignoreDefaultArgs:['--disable-extensions'],args:[`--disable-extensions-except=${extensionPath}`,`--load-extension=${extensionPath}`,'--no-first-run','--no-default-browser-check'],viewport:{width:390,height:960}});
 const errors=[];
 const evidence={browser:'Naver Whale',version:'',extensionId:'',checks:[],manualGate:'실제 브라우저 외곽 사이드바 버튼 클릭은 수동 확인 필요'};
 try{
  const worker=browser.serviceWorkers()[0]||await browser.waitForEvent('serviceworker',{timeout:20000});
  const id=new URL(worker.url()).host;evidence.extensionId=id;
- const runtime=await worker.evaluate(()=>({manifest:globalThis.chrome.runtime.getManifest(),sidebar:typeof globalThis.chrome.sidebarAction==='object',userAgent:navigator.userAgent}));
+ const runtime=await worker.evaluate(()=>({manifest:globalThis.chrome.runtime.getManifest(),sidebar:typeof (globalThis.whale?.sidebarAction||globalThis.chrome.sidebarAction)==='object',userAgent:navigator.userAgent}));
  assert.equal(runtime.manifest.name,'웨일 퀘스트');assert.ok(runtime.sidebar,'Whale sidebarAction API must exist');evidence.version=runtime.userAgent;
  evidence.checks.push('Whale loaded the unpacked MV3 extension and exposes sidebarAction');
  const page=await browser.newPage();page.on('pageerror',e=>errors.push(e.message));
