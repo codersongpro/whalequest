@@ -11,3 +11,5 @@ export const StarfishIcon=(p:P)=><Svg {...p}><path d="m16 3 3.5 8.5 9 .8-6.9 6 2
 export const TurtleIcon=(p:P)=><Svg {...p}><path d="M6 19c0-6 5-10 10-10s10 4 10 10Z"/><path d="M12 19l2-6h4l2 6M3 22l4-3m22 3-4-3M27 14l3-2"/></Svg>;
 export const CrabIcon=(p:P)=><Svg {...p}><ellipse cx="16" cy="19" rx="8" ry="5"/><path d="M8 15 4 8m24 0-4 7M9 22l-4 3m22 0-4-3M13 14v-3m6 3v-3"/></Svg>;
 export const BubbleIcon=(p:P)=><Svg {...p}><circle cx="12" cy="20" r="6"/><circle cx="22" cy="9" r="3"/><circle cx="24" cy="21" r="1.5"/></Svg>;
+export const DolphinIcon=(p:P)=><Svg {...p}><path d="M3 21c2-8 9-13 17-10l5-6-1 9c2 1 4 0 6-2-1 7-6 10-12 9l-4 5 1-6c-6 1-10 1-12 1Z"/><circle cx="11" cy="15" r="1" fill="currentColor"/></Svg>;
+export const SeahorseIcon=(p:P)=><Svg {...p}><path d="M13 5c4-2 8 0 8 4 0 3-3 4-3 7 0 3 3 4 3 7 0 3-3 4-6 3-3-1-3-5-1-6M13 5l-5 2 5 3"/><circle cx="16" cy="8" r="1" fill="currentColor"/></Svg>;

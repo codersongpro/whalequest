@@ -11,6 +11,29 @@
 .wave-divider{display:block;width:100%;height:28px;color:#cfe9e8}
 @media(prefers-reduced-motion:no-preference){.sea-float{animation:sea-float 6s ease-in-out infinite}@keyframes sea-float{50%{transform:translateY(-6px)}}}
 .fold{padding:0}.fold>summary{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 18px;min-height:48px;cursor:pointer;list-style:none;font-weight:700;font-size:15px;color:var(--navy)}
-.fold>summary::-webkit-details-marker{display:none}.fold>summary svg{color:var(--teal);transition:transform .2s}.fold[open]>summary svg{transform:translateY(-2px) rotate(-8deg);color:#0a6a78}
+.fold>summary::-webkit-details-marker{display:none}.fold>summary>svg{color:var(--teal);transition:transform .2s}.fold[open]>summary>svg{transform:rotate(180deg)}.fold-title{flex:1}.sea-icon-chip.small{width:36px;height:36px;border-radius:12px;flex:none}
 .fold-body{padding:0 18px 18px}.fold-fieldset{border:0;margin:0;padding:0;min-width:0}
-@media(prefers-reduced-motion:reduce){.fold>summary svg{transition:none}}
+@media(prefers-reduced-motion:reduce){.fold>summary>svg{transition:none}}
+.fold-tools{display:flex;gap:6px;justify-content:flex-end;margin:0 0 10px}.fold-tools button{border:1px solid var(--line);background:white;color:var(--teal);border-radius:999px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;min-height:34px}
+.embedded .section-heading>div{display:none}.embedded .section-heading{justify-content:flex-end;margin:0 0 8px}.embedded .section-heading .button{font-size:12px;min-height:34px;padding:6px 12px}
+.sidebar-workbench{height:calc(100vh - 240px);min-height:480px;border:0}
+/* ===== 에듀노트 스타일 메뉴: 얇은 선, 넓은 여백, 부드러운 색 면 ===== */
+.sidebar-shell{background:#fff}.sidebar-shell>header{border-bottom:1px solid #eef2f2;padding:16px 18px}.sidebar-shell main{padding:0 14px 20px}
+.context-sidebar{border-top:0;padding:12px 0 0;margin:0;background:none}
+.sidebar-modes{display:flex;gap:4px;background:#f1f5f5;border-radius:14px;padding:4px;margin:0 0 10px}
+.sidebar-modes button{flex:1;border:0;background:none;border-radius:11px;min-height:54px;padding:8px 2px;color:#5c727d;font-size:11px;font-weight:600;gap:3px}
+.sidebar-modes button svg{color:#7fa5ab}.sidebar-modes button[aria-pressed=true]{background:#fff;color:#087f90;box-shadow:0 1px 4px rgba(21,56,76,.12)}.sidebar-modes button[aria-pressed=true] svg{color:#087f90}
+.sidebar-mode-line{font-size:11px;color:#7a8e96;margin:0 2px 8px}
+.teacher-workbench{display:grid;gap:8px}.teacher-workbench .app-card.fold{border:0;border-radius:16px;background:#f7faf9;box-shadow:none;margin:0}
+.fold>summary{padding:12px 14px;min-height:56px;font-size:14px;font-weight:700;gap:12px}.fold:hover{background:#f1f7f6}.fold[open]{background:#fff;box-shadow:0 0 0 1px #e3eded}
+.fold[open]>summary{border-bottom:1px solid #eef2f2;border-radius:16px 16px 0 0}.fold-body{padding:14px}
+.fold-tools{margin:0 0 4px}.fold-tools button{border:0;background:none;color:#7a8e96;padding:4px 6px;font-weight:500}.fold-tools button:hover{color:#087f90}
+.sea-icon-chip.small{width:38px;height:38px;border-radius:13px}
+.fold-body .button-row button,.fold-body .button-row .button{border-radius:999px;border:1px solid #d8e6e5;background:#fff;color:#15384c;font-size:12px;font-weight:600;min-height:38px;padding:8px 14px}
+.fold-body .button-row button:hover,.fold-body .button-row .button:hover{background:#eef7f6}
+.fold-body input,.fold-body textarea,.fold-body select{border:1px solid #dbe7e6;border-radius:12px;background:#fff;padding:10px 12px}
+.sidebar-settings{margin:10px 2px 0}
+.sidebar-shell .context-sidebar{border-top:0;padding:12px 0 0;margin:0;background:none;border-radius:0}
+.context-sidebar .sidebar-workbench{height:calc(100vh - 230px);min-height:480px;border:0;margin-top:0}
+.embedded{padding:0}.embedded .teacher-workbench{padding:0 2px}
+.teacher-workbench .app-card.fold{background:#f4f8f8;border:0}.teacher-workbench .app-card.fold[open]{background:#fff;box-shadow:0 0 0 1px #e3eded}
