@@ -21,7 +21,9 @@ try{
  const page=await browser.newPage();page.on('pageerror',e=>errors.push(e.message));
  await page.goto(`chrome-extension://${id}/sidebar.html`);
  await expect(page.getByText('웨일 확장앱에서 실행 중')).toBeVisible();
- await expect(page.getByRole('button',{name:'웹앱 열기',exact:true})).toBeDisabled();
+ await expect(page.getByText('확장앱에 포함된 웹앱')).toBeVisible();
+ await expect(page.frameLocator('iframe[title="수업 운영과 전달물"]').getByRole('heading',{name:'수업 순환을 이어가세요'})).toBeVisible();
+ evidence.checks.push('Bundled web app renders inside the sidebar iframe without a deployed URL');
  await page.getByLabel('웹앱 기본 주소').fill('javascript:alert(1)');await page.getByRole('button',{name:'주소 저장',exact:true}).click();await expect(page.getByRole('alert')).toBeVisible();
  await page.getByLabel('웹앱 기본 주소').fill('http://127.0.0.1:5183');await page.getByRole('button',{name:'주소 저장',exact:true}).click();await expect(page.getByRole('status')).toHaveText('웹앱 주소를 저장했습니다.');
  await page.reload();await expect(page.getByText('http://127.0.0.1:5183',{exact:true})).toBeVisible();

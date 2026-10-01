@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1 --port 5183 --strictPort",
-    "build": "vite build && vite build --config vite.extension.config.ts && node scripts/package-extension.mjs",
+    "build": "vite build && vite build --config vite.extension.config.ts && vite build --config vite.extension-app.config.ts && node scripts/package-extension.mjs",
     "preview": "vite preview --host 127.0.0.1 --port 5183 --strictPort",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
