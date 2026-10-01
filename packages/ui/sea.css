@@ -37,3 +37,11 @@
 .context-sidebar .sidebar-workbench{height:calc(100vh - 230px);min-height:480px;border:0;margin-top:0}
 .embedded{padding:0}.embedded .teacher-workbench{padding:0 2px}
 .teacher-workbench .app-card.fold{background:#f4f8f8;border:0}.teacher-workbench .app-card.fold[open]{background:#fff;box-shadow:0 0 0 1px #e3eded}
+
+/* 이모지 아이콘 */
+.sea-icon-chip{font-size:22px;line-height:1}.sea-icon-chip.small{font-size:20px}
+.mode-emoji{font-size:22px;line-height:1;filter:grayscale(.35);opacity:.8}.sidebar-modes button[aria-pressed=true] .mode-emoji{filter:none;opacity:1}
+.brand-mark{display:inline-grid;place-items:center;width:37px;height:37px;border-radius:12px;background:#087f90;font-size:22px;line-height:1}
+.emoji-scene{position:relative;width:100%;max-width:420px;aspect-ratio:3/2;margin:auto}.emoji-scene span{position:absolute;line-height:1}
+.emoji-scene .e1{font-size:clamp(88px,16vw,150px);left:22%;top:22%}.emoji-scene .e2{font-size:clamp(28px,5vw,44px);left:8%;top:62%}.emoji-scene .e3{font-size:clamp(34px,6vw,54px);right:10%;top:64%}
+.emoji-scene .e4{font-size:clamp(22px,4vw,34px);right:20%;top:8%;opacity:.8}.emoji-scene .e5{font-size:clamp(26px,5vw,40px);left:46%;bottom:2%}.emoji-scene .e6{font-size:clamp(28px,5vw,44px);left:6%;top:14%}
