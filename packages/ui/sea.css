@@ -1,0 +1,16 @@
+.sea-icon-chip{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:14px;background:#e3f6f4;color:#087f90}
+.sea-icon-chip.blue{background:#e1effa;color:#1a60b5}.sea-icon-chip.sand{background:#fbf0d8;color:#a8741a}.sea-icon-chip.coral{background:#fde7e1;color:#c2563e}
+.sidebar-modes{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:0 0 12px}
+.sidebar-modes button{display:grid;justify-items:center;gap:4px;padding:9px 4px;border:1px solid var(--line);border-radius:12px;background:white;color:var(--navy);font-size:11px;font-weight:600;cursor:pointer;min-height:56px}
+.sidebar-modes button svg{color:var(--teal)}
+.sidebar-modes button[aria-pressed=true]{background:#087f90;border-color:#087f90;color:white}.sidebar-modes button[aria-pressed=true] svg{color:#ccf5ed}
+.sidebar-modes button:disabled{opacity:.5;cursor:not-allowed}
+.sidebar-mode-line{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11px;color:#4f6c75;margin:0 0 10px}
+.sidebar-mode-line button{border:0;background:none;color:var(--teal);font-size:11px;cursor:pointer;text-decoration:underline;min-height:32px}
+.sidebar-settings{margin-top:14px;font-size:11px}.sidebar-settings summary{cursor:pointer;color:#5a717a;min-height:34px;display:flex;align-items:center}
+.wave-divider{display:block;width:100%;height:28px;color:#cfe9e8}
+@media(prefers-reduced-motion:no-preference){.sea-float{animation:sea-float 6s ease-in-out infinite}@keyframes sea-float{50%{transform:translateY(-6px)}}}
+.fold{padding:0}.fold>summary{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 18px;min-height:48px;cursor:pointer;list-style:none;font-weight:700;font-size:15px;color:var(--navy)}
+.fold>summary::-webkit-details-marker{display:none}.fold>summary svg{color:var(--teal);transition:transform .2s}.fold[open]>summary svg{transform:translateY(-2px) rotate(-8deg);color:#0a6a78}
+.fold-body{padding:0 18px 18px}.fold-fieldset{border:0;margin:0;padding:0;min-width:0}
+@media(prefers-reduced-motion:reduce){.fold>summary svg{transition:none}}
